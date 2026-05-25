@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HiIndexRouteImport } from './routes/hi/index'
 import { Route as CategorySlugRouteImport } from './routes/category/$slug'
+import { Route as HiCategorySlugRouteImport } from './routes/hi/category/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const CategorySlugRoute = CategorySlugRouteImport.update({
   path: '/category/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HiCategorySlugRoute = HiCategorySlugRouteImport.update({
+  id: '/hi/category/$slug',
+  path: '/hi/category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/category/$slug': typeof CategorySlugRoute
   '/hi/': typeof HiIndexRoute
+  '/hi/category/$slug': typeof HiCategorySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/category/$slug': typeof CategorySlugRoute
   '/hi': typeof HiIndexRoute
+  '/hi/category/$slug': typeof HiCategorySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/category/$slug': typeof CategorySlugRoute
   '/hi/': typeof HiIndexRoute
+  '/hi/category/$slug': typeof HiCategorySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/category/$slug' | '/hi/'
+  fullPaths: '/' | '/category/$slug' | '/hi/' | '/hi/category/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/category/$slug' | '/hi'
-  id: '__root__' | '/' | '/category/$slug' | '/hi/'
+  to: '/' | '/category/$slug' | '/hi' | '/hi/category/$slug'
+  id: '__root__' | '/' | '/category/$slug' | '/hi/' | '/hi/category/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CategorySlugRoute: typeof CategorySlugRoute
   HiIndexRoute: typeof HiIndexRoute
+  HiCategorySlugRoute: typeof HiCategorySlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategorySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hi/category/$slug': {
+      id: '/hi/category/$slug'
+      path: '/hi/category/$slug'
+      fullPath: '/hi/category/$slug'
+      preLoaderRoute: typeof HiCategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CategorySlugRoute: CategorySlugRoute,
   HiIndexRoute: HiIndexRoute,
+  HiCategorySlugRoute: HiCategorySlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
