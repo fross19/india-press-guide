@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HiIndexRouteImport } from './routes/hi/index'
+import { Route as CategorySlugRouteImport } from './routes/category/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,30 +23,39 @@ const HiIndexRoute = HiIndexRouteImport.update({
   path: '/hi/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategorySlugRoute = CategorySlugRouteImport.update({
+  id: '/category/$slug',
+  path: '/category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/category/$slug': typeof CategorySlugRoute
   '/hi/': typeof HiIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/category/$slug': typeof CategorySlugRoute
   '/hi': typeof HiIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/category/$slug': typeof CategorySlugRoute
   '/hi/': typeof HiIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/hi/'
+  fullPaths: '/' | '/category/$slug' | '/hi/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/hi'
-  id: '__root__' | '/' | '/hi/'
+  to: '/' | '/category/$slug' | '/hi'
+  id: '__root__' | '/' | '/category/$slug' | '/hi/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CategorySlugRoute: typeof CategorySlugRoute
   HiIndexRoute: typeof HiIndexRoute
 }
 
@@ -65,11 +75,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/category/$slug': {
+      id: '/category/$slug'
+      path: '/category/$slug'
+      fullPath: '/category/$slug'
+      preLoaderRoute: typeof CategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CategorySlugRoute: CategorySlugRoute,
   HiIndexRoute: HiIndexRoute,
 }
 export const routeTree = rootRouteImport
