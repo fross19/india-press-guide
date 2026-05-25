@@ -23,7 +23,10 @@ export function Layout({
       <header className="border-b">
         <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
           <Link to={homeHref} className="flex items-center gap-2 font-semibold text-lg">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded bg-primary text-primary-foreground text-sm font-bold">
+            <span
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-white text-base font-bold shadow-sm"
+              style={{ background: "var(--gradient-hero)" }}
+            >
               P
             </span>
             <span>{SITE_NAME}</span>
