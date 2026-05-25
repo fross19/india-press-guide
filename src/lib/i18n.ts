@@ -85,7 +85,6 @@ export function buildHeadMeta(opts: {
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
     { name: "robots", content: "index, follow" },
-    { httpEquiv: "content-language", content: lang === "hi" ? "hi-IN" : "en-IN" },
   ];
 
   const links = [
