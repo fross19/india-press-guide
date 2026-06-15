@@ -19,6 +19,7 @@ export const t = {
     aboutText:
       "PressMap.in lists the leading newspapers, magazines and online news portals of India to help readers, researchers and media professionals discover the Indian press in one place.",
     partnersTitle: "Partner directories",
+    contact: "Contact",
     footerRights: "All rights reserved.",
     metaSuffix: "PressMap.in — Indian Press Directory",
     publicationsIn: (n: number) => `${n} publications`,
@@ -40,6 +41,7 @@ export const t = {
     aboutText:
       "PressMap.in भारत के प्रमुख समाचार पत्रों, पत्रिकाओं और ऑनलाइन समाचार पोर्टलों की सूची प्रदान करता है ताकि पाठक, शोधकर्ता और मीडिया पेशेवर भारतीय प्रेस को एक ही स्थान पर खोज सकें।",
     partnersTitle: "साझेदार निर्देशिकाएँ",
+    contact: "संपर्क",
     footerRights: "सर्वाधिकार सुरक्षित।",
     metaSuffix: "PressMap.in — भारतीय प्रेस निर्देशिका",
     publicationsIn: (n: number) => `${n} प्रकाशन`,
