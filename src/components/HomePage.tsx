@@ -66,48 +66,63 @@ export function HomePage({ lang }: { lang: Lang }) {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pt-12 pb-16 space-y-12">
-        {groupOrder.map((g) => {
-          const cats = categories.filter((c) => c.group === g.id);
-          const style = groupStyles[g.id] ?? groupStyles["online"];
-          return (
-            <div key={g.id}>
-              <div className="flex items-center gap-3 mb-5">
-                <span
-                  className="h-8 w-1.5 rounded-full"
-                  style={{ background: style.gradient }}
-                />
-                <h2 className="text-2xl font-semibold">
-                  {lang === "hi" ? g.title_hi : g.title_en}
-                </h2>
+        {(() => {
+          const newsGroupIds = ["dailies-national", "dailies-regional", "online"];
+          const newsGroups = groupOrder.filter((g) => newsGroupIds.includes(g.id));
+          const otherGroups = groupOrder.filter((g) => !newsGroupIds.includes(g.id));
+
+          const renderGroup = (g: (typeof groupOrder)[number], innerCols: string) => {
+            const cats = categories.filter((c) => c.group === g.id);
+            const style = groupStyles[g.id] ?? groupStyles["online"];
+            return (
+              <div key={g.id}>
+                <div className="flex items-center gap-3 mb-5">
+                  <span
+                    className="h-8 w-1.5 rounded-full"
+                    style={{ background: style.gradient }}
+                  />
+                  <h2 className="text-2xl font-semibold">
+                    {lang === "hi" ? g.title_hi : g.title_en}
+                  </h2>
+                </div>
+                <ul className={"grid gap-4 " + innerCols}>
+                  {cats.map((c) => (
+                    <li key={c.slug}>
+                      <Link
+                        to={pathFor(lang, `category/${c.slug}`)}
+                        className={"group relative block overflow-hidden rounded-xl border bg-card p-5 h-full transition-all hover:-translate-y-0.5 hover:shadow-lg " + style.ring}
+                      >
+                        <div
+                          aria-hidden
+                          className="absolute inset-x-0 top-0 h-1"
+                          style={{ background: style.gradient }}
+                        />
+                        <h3 className="font-semibold text-lg">
+                          {lang === "hi" ? c.title_hi : c.title_en}
+                        </h3>
+                        <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                          {lang === "hi" ? c.description_hi : c.description_en}
+                        </p>
+                        <span className={"mt-3 inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium " + style.chip}>
+                          {tr.publicationsIn(c.publications.length)}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {cats.map((c) => (
-                  <li key={c.slug}>
-                    <Link
-                      to={pathFor(lang, `category/${c.slug}`)}
-                      className={"group relative block overflow-hidden rounded-xl border bg-card p-5 h-full transition-all hover:-translate-y-0.5 hover:shadow-lg " + style.ring}
-                    >
-                      <div
-                        aria-hidden
-                        className="absolute inset-x-0 top-0 h-1"
-                        style={{ background: style.gradient }}
-                      />
-                      <h3 className="font-semibold text-lg">
-                        {lang === "hi" ? c.title_hi : c.title_en}
-                      </h3>
-                      <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                        {lang === "hi" ? c.description_hi : c.description_en}
-                      </p>
-                      <span className={"mt-3 inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium " + style.chip}>
-                        {tr.publicationsIn(c.publications.length)}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            );
+          };
+
+          return (
+            <>
+              <div className="grid gap-8 lg:grid-cols-3 items-start">
+                {newsGroups.map((g) => renderGroup(g, "grid-cols-1"))}
+              </div>
+              {otherGroups.map((g) => renderGroup(g, "sm:grid-cols-2 lg:grid-cols-3"))}
+            </>
           );
-        })}
+        })()}
 
         <div
           className="rounded-2xl border p-6 md:p-8"

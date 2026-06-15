@@ -74,6 +74,16 @@ export function Layout({
                   newspapers-europe.eu
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://www.press-directory.com/contact-guide-presse.html"
+                  target="_blank"
+                  rel="noopener"
+                  className="hover:underline"
+                >
+                  {tr.contact}
+                </a>
+              </li>
             </ul>
           </div>
           <p>
