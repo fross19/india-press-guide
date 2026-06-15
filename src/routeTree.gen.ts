@@ -9,11 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HiIndexRouteImport } from './routes/hi/index'
+import { Route as HiSitemapRouteImport } from './routes/hi/sitemap'
 import { Route as CategorySlugRouteImport } from './routes/category/$slug'
 import { Route as HiCategorySlugRouteImport } from './routes/hi/category/$slug'
 
+const SitemapRoute = SitemapRouteImport.update({
+  id: '/sitemap',
+  path: '/sitemap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -22,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const HiIndexRoute = HiIndexRouteImport.update({
   id: '/hi/',
   path: '/hi/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HiSitemapRoute = HiSitemapRouteImport.update({
+  id: '/hi/sitemap',
+  path: '/hi/sitemap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategorySlugRoute = CategorySlugRouteImport.update({
@@ -37,40 +49,74 @@ const HiCategorySlugRoute = HiCategorySlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/sitemap': typeof SitemapRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/hi/sitemap': typeof HiSitemapRoute
   '/hi/': typeof HiIndexRoute
   '/hi/category/$slug': typeof HiCategorySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sitemap': typeof SitemapRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/hi/sitemap': typeof HiSitemapRoute
   '/hi': typeof HiIndexRoute
   '/hi/category/$slug': typeof HiCategorySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/sitemap': typeof SitemapRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/hi/sitemap': typeof HiSitemapRoute
   '/hi/': typeof HiIndexRoute
   '/hi/category/$slug': typeof HiCategorySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/category/$slug' | '/hi/' | '/hi/category/$slug'
+  fullPaths:
+    | '/'
+    | '/sitemap'
+    | '/category/$slug'
+    | '/hi/sitemap'
+    | '/hi/'
+    | '/hi/category/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/category/$slug' | '/hi' | '/hi/category/$slug'
-  id: '__root__' | '/' | '/category/$slug' | '/hi/' | '/hi/category/$slug'
+  to:
+    | '/'
+    | '/sitemap'
+    | '/category/$slug'
+    | '/hi/sitemap'
+    | '/hi'
+    | '/hi/category/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/sitemap'
+    | '/category/$slug'
+    | '/hi/sitemap'
+    | '/hi/'
+    | '/hi/category/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SitemapRoute: typeof SitemapRoute
   CategorySlugRoute: typeof CategorySlugRoute
+  HiSitemapRoute: typeof HiSitemapRoute
   HiIndexRoute: typeof HiIndexRoute
   HiCategorySlugRoute: typeof HiCategorySlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap': {
+      id: '/sitemap'
+      path: '/sitemap'
+      fullPath: '/sitemap'
+      preLoaderRoute: typeof SitemapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -83,6 +129,13 @@ declare module '@tanstack/react-router' {
       path: '/hi'
       fullPath: '/hi/'
       preLoaderRoute: typeof HiIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hi/sitemap': {
+      id: '/hi/sitemap'
+      path: '/hi/sitemap'
+      fullPath: '/hi/sitemap'
+      preLoaderRoute: typeof HiSitemapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/category/$slug': {
@@ -104,7 +157,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SitemapRoute: SitemapRoute,
   CategorySlugRoute: CategorySlugRoute,
+  HiSitemapRoute: HiSitemapRoute,
   HiIndexRoute: HiIndexRoute,
   HiCategorySlugRoute: HiCategorySlugRoute,
 }
