@@ -20,6 +20,13 @@ export const t = {
       "PressMap.in lists the leading newspapers, magazines and online news portals of India to help readers, researchers and media professionals discover the Indian press in one place.",
     partnersTitle: "Partner directories",
     contact: "Contact",
+    sitemap: "Sitemap",
+    sitemapTitle: "Sitemap",
+    sitemapIntro:
+      "All pages of PressMap.in — browse every category and find the full list of Indian newspapers, magazines and online news portals.",
+    mainPages: "Main pages",
+    categoriesAll: "Categories",
+    languagesAvailable: "Available languages",
     footerRights: "All rights reserved.",
     metaSuffix: "PressMap.in — Indian Press Directory",
     publicationsIn: (n: number) => `${n} publications`,
@@ -42,6 +49,13 @@ export const t = {
       "PressMap.in भारत के प्रमुख समाचार पत्रों, पत्रिकाओं और ऑनलाइन समाचार पोर्टलों की सूची प्रदान करता है ताकि पाठक, शोधकर्ता और मीडिया पेशेवर भारतीय प्रेस को एक ही स्थान पर खोज सकें।",
     partnersTitle: "साझेदार निर्देशिकाएँ",
     contact: "संपर्क",
+    sitemap: "साइटमैप",
+    sitemapTitle: "साइटमैप",
+    sitemapIntro:
+      "PressMap.in के सभी पृष्ठ — हर श्रेणी देखें और भारतीय समाचार पत्रों, पत्रिकाओं और ऑनलाइन समाचार पोर्टलों की पूरी सूची प्राप्त करें।",
+    mainPages: "मुख्य पृष्ठ",
+    categoriesAll: "श्रेणियाँ",
+    languagesAvailable: "उपलब्ध भाषाएँ",
     footerRights: "सर्वाधिकार सुरक्षित।",
     metaSuffix: "PressMap.in — भारतीय प्रेस निर्देशिका",
     publicationsIn: (n: number) => `${n} प्रकाशन`,
@@ -56,6 +70,10 @@ export function pathFor(lang: Lang, sub: string = "") {
   return "/" + clean;
 }
 
+export function absUrl(lang: Lang, sub: string = "") {
+  return SITE_URL + pathFor(lang, sub);
+}
+
 export function altLang(lang: Lang): Lang {
   return lang === "en" ? "hi" : "en";
 }
@@ -68,9 +86,9 @@ export function buildHeadMeta(opts: {
   jsonLd?: object;
 }) {
   const { lang, title, description, path, jsonLd } = opts;
-  const enPath = pathFor("en", path);
-  const hiPath = pathFor("hi", path);
-  const canonical = lang === "en" ? enPath : hiPath;
+  const enHref = SITE_URL + pathFor("en", path);
+  const hiHref = SITE_URL + pathFor("hi", path);
+  const canonical = lang === "en" ? enHref : hiHref;
   const ogLocale = lang === "hi" ? "hi_IN" : "en_IN";
 
   const meta = [
@@ -91,9 +109,9 @@ export function buildHeadMeta(opts: {
 
   const links = [
     { rel: "canonical", href: canonical },
-    { rel: "alternate", hrefLang: "en-IN", href: enPath },
-    { rel: "alternate", hrefLang: "hi-IN", href: hiPath },
-    { rel: "alternate", hrefLang: "x-default", href: enPath },
+    { rel: "alternate", hrefLang: "en-IN", href: enHref },
+    { rel: "alternate", hrefLang: "hi-IN", href: hiHref },
+    { rel: "alternate", hrefLang: "x-default", href: enHref },
   ];
 
   const scripts = jsonLd

@@ -16,6 +16,20 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://pressmap.in/" />
   </url>
   <url>
+    <loc>https://pressmap.in/sitemap</loc>
+    <lastmod>2026-06-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://pressmap.in/sitemap" />
+    <xhtml:link rel="alternate" hreflang="hi-IN" href="https://pressmap.in/hi/sitemap" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pressmap.in/sitemap" />
+  </url>
+  <url>
+    <loc>https://pressmap.in/hi/sitemap</loc>
+    <lastmod>2026-06-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://pressmap.in/sitemap" />
+    <xhtml:link rel="alternate" hreflang="hi-IN" href="https://pressmap.in/hi/sitemap" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pressmap.in/sitemap" />
+  </url>
+  <url>
     <loc>https://pressmap.in/category/national-dailies</loc>
     <lastmod>2026-05-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en-IN" href="https://pressmap.in/category/national-dailies" />

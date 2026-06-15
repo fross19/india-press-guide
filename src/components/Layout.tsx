@@ -84,6 +84,11 @@ export function Layout({
                   {tr.contact}
                 </a>
               </li>
+          <li>
+            <Link to={pathFor(lang, "sitemap")} className="hover:underline">
+              {tr.sitemap}
+            </Link>
+          </li>
             </ul>
           </div>
           <p>
