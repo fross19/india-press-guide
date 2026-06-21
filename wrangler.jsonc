@@ -1,7 +1,7 @@
 {
   "name": "india-press-guide",
   "main": ".output/server/index.mjs",
-  "compatibility_date": "2024-11-01",
+  "compatibility_date": "2025-09-24",
   "compatibility_flags": [
     "nodejs_compat"
   ],
