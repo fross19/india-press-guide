@@ -1,22 +1,15 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tanstack-start-app",
-  "compatibility_date": "2025-09-24",
-  "compatibility_flags": ["nodejs_compat"],
-  "main": "src/server.ts",
-
-"build": {
-    "upload": {
-      "rules": [
-        { "type": "Text", "globs": ["**/*.html"] }
-      ]
-    }
+  "name": "india-press-guide",
+  "main": ".output/server/index.mjs",
+  "compatibility_date": "2024-11-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "directory": ".output/public",
+    "binding": "ASSETS"
   },
-  "minify": false,
-  "node_compat": true,
-  "no_bundle": false,
-  "external": [
-    "tanstack-start-injected-head-scripts:v"
-  ]
-
+  "observability": {
+    "enabled": true
+  }
 }
