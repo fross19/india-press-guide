@@ -4,4 +4,19 @@
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
   "main": "src/server.ts",
+
+"build": {
+    "upload": {
+      "rules": [
+        { "type": "Text", "globs": ["**/*.html"] }
+      ]
+    }
+  },
+  "minify": false,
+  "node_compat": true,
+  "no_bundle": false,
+  "external": [
+    "tanstack-start-injected-head-scripts:v"
+  ]
+
 }
